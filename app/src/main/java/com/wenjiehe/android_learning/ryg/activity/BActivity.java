@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.wenjiehe.android_learning.R;
 
-public class BActivity extends AppCompatActivity {
+public class BActivity extends BaseActivity {
 
     Button button_b;
 

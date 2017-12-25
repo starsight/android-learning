@@ -10,10 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-
         </activity>
         <activity
-
             android:name=".ryg.activity.AActivity"
             android:launchMode="singleTask"
             android:taskAffinity="com.wenjie.task1">
@@ -30,7 +28,6 @@
         </activity>
         <activity
             android:name=".ryg.activity.CActivity"
-            android:launchMode="singleTask"
             android:taskAffinity="com.wenjie.task2">
         </activity>
         <activity
@@ -38,6 +35,7 @@
             android:launchMode="singleTask"
             android:taskAffinity="com.wenjie.task2">
         </activity>
+
     </application>
 
 </manifest>
