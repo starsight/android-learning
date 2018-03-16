@@ -15,11 +15,7 @@
             android:name=".ryg.activity.AActivity"
             android:launchMode="singleTask"
             android:taskAffinity="com.wenjie.task1">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
             android:name=".ryg.activity.BActivity"
@@ -35,7 +31,13 @@
             android:launchMode="singleTask"
             android:taskAffinity="com.wenjie.task2">
         </activity>
+        <activity android:name=".ryg.activity.FragmentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
