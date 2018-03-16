@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".ryg.activity.CActivity"
-            android:taskAffinity="com.wenjie.task2">
+            android:taskAffinity="com.wenjie.task2"><!-- TaskAffinity设置无效-->
         </activity>
         <activity
             android:name=".ryg.activity.DActivity"
