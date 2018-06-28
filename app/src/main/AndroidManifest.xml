@@ -15,7 +15,6 @@
             android:name=".ryg.activity.AActivity"
             android:launchMode="singleTask"
             android:taskAffinity="com.wenjie.task1">
-
         </activity>
         <activity
             android:name=".ryg.activity.BActivity"
@@ -24,7 +23,7 @@
         </activity>
         <activity
             android:name=".ryg.activity.CActivity"
-            android:taskAffinity="com.wenjie.task2"><!-- TaskAffinity设置无效-->
+            android:taskAffinity="com.wenjie.task2"> <!-- TaskAffinity设置无效 -->
         </activity>
         <activity
             android:name=".ryg.activity.DActivity"
@@ -38,6 +37,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>
