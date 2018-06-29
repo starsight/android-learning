@@ -2,22 +2,18 @@ package com.wenjiehe.android_learning;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wenjiehe.android_learning.Adapter.GankRecyclerViewAdapter;
 import com.wenjiehe.android_learning.Entry.GankItem;
 import com.wenjiehe.android_learning.Network.NetworkManager;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,11 +34,14 @@ public class MainActivity extends AppCompatActivity{
     @BindView(R.id.button_network_request_1)
     Button buttonNetworkRequest1;
 
+    @BindView(R.id.button_network_request_2)
+    Button button_network_request_2;
+
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
 
     private ArrayList<GankItem> myData;
-    private MyAdapter adapter;
+    private GankRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +54,11 @@ public class MainActivity extends AppCompatActivity{
 
         networkManager = NetworkManager.getInstance();
         CustomLayoutManager customLayoutManager = new CustomLayoutManager();
-        recyclerView.setLayoutManager(customLayoutManager);
-        adapter = new MyAdapter();
+        recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+        adapter = new GankRecyclerViewAdapter(MainActivity.this,myData);
         recyclerView.setAdapter(adapter);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
     }
 
@@ -69,58 +70,32 @@ public class MainActivity extends AppCompatActivity{
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onNew);
+
+    }
+
+    @OnClick(R.id.button_network_request_2)
+    void addGankInfo(){
+        GankItem gankItem = new GankItem();
+        gankItem.desc = "1";
+        myData.add(gankItem);
+        adapter.notifyItemInserted(myData.size()-1);
+        recyclerView.scrollToPosition(myData.size()-1);
     }
 
     private Action1<List<GankItem>> onNew = new Action1<List<GankItem>>() {
         @Override
         public void call(List<GankItem> gankItemList) {
+            int i=0;
+            int index = myData.size();
             for (GankItem gankItem :gankItemList) {
                 Log.d(TAG, "call: "+ gankItem.toString());
                 myData.add(gankItem);
+                //adapter.notifyItemInserted(i++);
             }
-            adapter.notifyDataSetChanged();
+            adapter.notifyItemRangeInserted(index,myData.size());
             //recyclerView.notifyAll();
         }
     };
 
-    //自定义Adapter
-    class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View v = LayoutInflater.from(MainActivity.this).inflate(R.layout.recycler_view_item, parent, false);
-
-            MyViewHolder viewHolder = new MyViewHolder(v);
-
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            GankItem myEntity = myData.get(position);
-
-            holder.setStr(myEntity.desc);
-        }
-
-        @Override
-        public int getItemCount() {
-            return myData.size();
-        }
-    }
-
-    //自定义Holder
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView strTv;
-
-
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            strTv = (TextView) itemView.findViewById(R.id.desc);
-        }
-
-        public void setStr(String str) {
-            strTv.setText(str);
-        }
-
-    }
 }
