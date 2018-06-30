@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity{
     void addGankInfo(){
         GankItem gankItem = new GankItem();
         gankItem.desc = "1";
+        gankItem.type ="";
         myData.add(gankItem);
         adapter.notifyItemInserted(myData.size()-1);
         recyclerView.scrollToPosition(myData.size()-1);
