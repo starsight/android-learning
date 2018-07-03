@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new CustomAdapter(myData,MainActivity.this);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(null);
+        recyclerView.setItemViewCacheSize(3);
         MySnap snap = new MySnap();
         snap.attachToRecyclerView(recyclerView);
 

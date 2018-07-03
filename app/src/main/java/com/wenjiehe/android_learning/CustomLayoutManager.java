@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class CustomLayoutManager extends RecyclerView.LayoutManager implements RecyclerView.SmoothScroller.ScrollVectorProvider {
     private static final String TAG = "CustomLayoutManager";
     private static final int MIN_VY = 300;
@@ -15,11 +18,12 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager implements R
     private int mPositionOffset = 0;
     private int mMinVy = 0;
     private Context mContext;
-    //private boolean highSpeedScroll =false;
+   // private ArrayList<View> cacheViewList;
 
     public CustomLayoutManager(Context context) {
         mContext = context;
         mMinVy = (int) mContext.getResources().getDisplayMetrics().density * MIN_VY;
+        //cacheViewList = new ArrayList<>();
     }
 
     @Override
@@ -117,9 +121,11 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager implements R
         }
 
         if (pre != null && secondary !=pre) {
+            //Log.d("hewenjie", "fill pre: "+(mPosition-1));
             recycler.recycleView(pre);
         }
         if (next != null && secondary !=next) {
+            //Log.d("hewenjie", "fill next: "+(mPosition+1));
             recycler.recycleView(next);
         }
 
@@ -285,5 +291,14 @@ public class CustomLayoutManager extends RecyclerView.LayoutManager implements R
         }
 
         return null;
+    }
+
+    @Override
+    public void collectAdjacentPrefetchPositions(int dx, int dy, RecyclerView.State state, LayoutPrefetchRegistry layoutPrefetchRegistry) {
+        super.collectAdjacentPrefetchPositions(dx, dy, state, layoutPrefetchRegistry);
+        Log.d(TAG, "collectAdjacentPrefetchPositions: "+mPosition);
+//        for (int i = 0; i +mPosition< state.getItemCount()-1&&i<=3; i++) {
+//            layoutPrefetchRegistry.addPosition(mPosition+i+1,getItemHeightPositon()*(i+1));
+//        }
     }
 }
