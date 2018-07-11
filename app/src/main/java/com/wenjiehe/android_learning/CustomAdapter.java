@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         GankItem myEntity = mData.get(position);
         ImageViewHolder h = (ImageViewHolder)holder;
-
+        h.textView.setTag(position);
         Log.d("hewenjie", "onBindViewHolder: "+position);
         h.textView.setText(myEntity.desc);
         if (myEntity.getImage() != null) {
@@ -70,7 +71,9 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            int pos = 0;//((ImageViewHolder)v.getParent()).getAdapterPosition();
+            LinearLayout lin = (LinearLayout) ((FlipCard)v).getChildAt(0);
+            TextView t = (TextView)lin.getChildAt(0);
+            int pos = (Integer)t.getTag();//((ImageViewHolder)v.getParent()).getAdapterPosition();
             Toast.makeText(mContext,"click"+pos,Toast.LENGTH_SHORT).show();
         }
     };
