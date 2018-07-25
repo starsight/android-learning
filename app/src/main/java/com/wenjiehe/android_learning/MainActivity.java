@@ -1,7 +1,10 @@
 package com.wenjiehe.android_learning;
 
+import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 import com.wenjiehe.android_learning.Adapter.GankRecyclerViewAdapter;
 import com.wenjiehe.android_learning.Entry.GankItem;
 import com.wenjiehe.android_learning.Network.NetworkManager;
+import com.wenjiehe.android_learning.ryg.activity.FragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,8 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -75,12 +81,16 @@ public class MainActivity extends AppCompatActivity{
 
     @OnClick(R.id.button_network_request_2)
     void addGankInfo(){
-        GankItem gankItem = new GankItem();
-        gankItem.desc = "1";
-        gankItem.type ="";
-        myData.add(gankItem);
-        adapter.notifyItemInserted(myData.size()-1);
-        recyclerView.scrollToPosition(myData.size()-1);
+//        GankItem gankItem = new GankItem();
+//        gankItem.desc = "1";
+//        gankItem.type ="";
+//        myData.add(gankItem);
+//        adapter.notifyItemInserted(myData.size()-1);
+//        recyclerView.scrollToPosition(myData.size()-1);
+        // 每隔1s执行一次事件
+
+        startActivity(new Intent(MainActivity.this, FragmentActivity.class));
+
     }
 
     private Action1<List<GankItem>> onNew = new Action1<List<GankItem>>() {
