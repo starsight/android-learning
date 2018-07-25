@@ -12,21 +12,21 @@
     <Button
         android:id="@+id/button_network_request_1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:text="Network Request"/>
 
     <Button
-        android:id="@+id/button_network_request_2"
+        android:id="@+id/button_scroll_to_top"
+        android:text="滑至顶端"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add"/>
+        android:layout_height="wrap_content"/>
 
+        <android.support.v7.widget.RecyclerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 
 </LinearLayout>

@@ -16,15 +16,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.wenjiehe.android_learning.Entry.GankItem;
 import com.wenjiehe.android_learning.R;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
-import java.util.WeakHashMap;
 
 public class GankRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -71,14 +70,15 @@ public class GankRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
             imageViewHolder.setStr(myEntity.desc);
             //先设置图片占位符
             //imageViewHolder.gankImage.setImageDrawable(mContext.getDrawable(R.mipmap.ic_launcher));
-            final String url = myEntity.getImage();
+            final String url = myEntity.getImage()+"?imageView2/1/w/150/format/jpg";
             //为imageView设置Tag,内容是该imageView等待加载的图片url
-            imageViewHolder.gankImage.setTag(url);
-            if (mLruCache.get(url) != null) {
-                imageViewHolder.gankImage.setImageDrawable(mLruCache.get(url));
-            } else {
-                loadBitmap(url, imageViewHolder.gankImage);
-            }
+            //imageViewHolder.gankImage.setTag(url);
+            Glide.with(mContext).load(url).asBitmap().into(imageViewHolder.gankImage);
+//            if (mLruCache.get(url) != null) {
+//                imageViewHolder.gankImage.setImageDrawable(mLruCache.get(url));
+//            } else {
+//                loadBitmap(url, imageViewHolder.gankImage);
+//            }
         }
     }
 
@@ -237,8 +237,9 @@ public class GankRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.V
                 if (this == task && imageView != null) {
                     imageView.setImageDrawable(bitmapDrawable);
                 } else {
-                    if (task != null)
+                    if (task != null) {
                         Log.d(TAG, "onPostExecute: ");
+                    }
                 }
             }
 
