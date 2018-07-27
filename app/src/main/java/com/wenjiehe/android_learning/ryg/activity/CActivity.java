@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.wenjiehe.android_learning.BaseActivity;
 import com.wenjiehe.android_learning.R;
 
 public class CActivity extends BaseActivity {
